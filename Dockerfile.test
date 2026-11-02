@@ -1,0 +1,18 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json* ./
+
+# Install all dependencies including devDependencies
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Set test environment
+ENV NODE_ENV=test
+
+# Default command runs tests
+CMD ["npm", "test"]
